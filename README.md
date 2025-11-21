@@ -7,7 +7,7 @@
 
 This repository documents my journey transitioning from a **.NET developer** into a **native iOS Engineer**, using a structured **24-week roadmap** built entirely on the *Hacking with Swift* book collection.
 
-The goal is to become **job-ready for iOS Engineer I positions**, with a portfolio of polished, real apps.
+The goal is to become **job-ready for iOS Engineer positions**, with a portfolio of polished, real apps.
 
 ---
 
