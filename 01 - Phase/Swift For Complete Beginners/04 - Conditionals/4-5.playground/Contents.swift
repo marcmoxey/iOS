@@ -38,3 +38,21 @@ for _ in 1...5 {
 }
 
 print(lyric)
+
+let personInfo = ["Lebron" : 35, "Messi": 38, "Neymar":32]
+
+for (personName, personAge) in personInfo{
+    print("\(personName) is \(personAge) years old")
+}
+
+let studentScores = ["Alice":90, "Bob":85, "Charlie":88]
+
+for studentName in studentScores.keys {
+    print("Student: \(studentName)")
+}
+
+let productPrices = ["Laptop": 1200.00, "Mouse":25.00, "Keyboard":75.00]
+
+for price in productPrices.values {
+    print("Price: \(price)")
+}
