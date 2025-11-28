@@ -52,13 +52,21 @@ struct ContentView: View {
                     .pickerStyle(.navigationLink)
                 }
                 Section("How much tip do you want to leave?") {
+                    //                    Picker("Tip percentage", selection: $tipPercentage) {
+                    //                        ForEach(tipPercentages, id: \.self) {
+                    //                            Text($0, format: .percent)
+                    //                        }
+                    //                    }
+                    //                    .pickerStyle(.segmented)
                     Picker("Tip percentage", selection: $tipPercentage) {
-                        ForEach(tipPercentages, id: \.self) {
-                            Text($0, format: .percent)
+                        ForEach(0..<101) {
+                            Text("\($0)%")
                         }
                     }
-                    .pickerStyle(.segmented)
+                    .pickerStyle(.navigationLink)
                 }
+                
+                
                 Section("Amount per person") {
                     Text(
                         totalPerPerson,
