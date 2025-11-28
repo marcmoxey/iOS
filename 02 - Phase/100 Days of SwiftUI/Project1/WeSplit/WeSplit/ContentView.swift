@@ -23,6 +23,15 @@ struct ContentView: View {
         
         return amountPerPerson
     }
+    
+    var grandTotal: Double {
+        let tipSelection = Double(tipPercentage)
+        
+        let tipValue = checkAmount / 100 * tipSelection
+        let grandTotal = checkAmount + tipValue
+        
+        return grandTotal
+    }
     @FocusState private var amountIsFocused: Bool
     var body: some View {
         NavigationStack {
@@ -56,6 +65,14 @@ struct ContentView: View {
                         format: .currency(code: Locale.current.currency?.identifier ?? "USD")
                     )
                 }
+                Section("Total amount plus tip") {
+                    Text(grandTotal
+                        ,
+                        format: .currency(code: Locale.current.currency?.identifier ?? "USD")
+                    )
+                }
+                
+             
             }
             .navigationTitle("WeSplit")
             .toolbar {
