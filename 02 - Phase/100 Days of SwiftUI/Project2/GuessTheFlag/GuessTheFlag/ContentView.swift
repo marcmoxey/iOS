@@ -62,21 +62,24 @@ struct ContentView: View {
                 Spacer()
             }
             .padding()
-            .alert(
-                scoreTitle,isPresented: $showingScore) {
-                    Button("Continue", action: askQuestion)
-                }message: {
-                    Text("Your score is  \(score)")
-                }
         }
+        .alert(
+            scoreTitle,isPresented: $showingScore) {
+                Button("Continue", action: askQuestion)
+            }message: {
+                Text("Your score is  \(score)")
+            }
     }
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
             score += 1
+        
         } else {
-            showingScore = true
+            scoreTitle = "Wrong! That's the flag of \(countries[number])"
+            
         }
+        showingScore = true
     }
     
     func askQuestion() {
