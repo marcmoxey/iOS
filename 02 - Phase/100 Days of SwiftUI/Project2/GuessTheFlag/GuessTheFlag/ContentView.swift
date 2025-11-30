@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
     @State private var score = 0
+ 
     var body: some View {
         
         ZStack {
@@ -40,10 +41,12 @@ struct ContentView: View {
                             Button {
                                 flagTapped(number)
                             } label: {
-                                Image(countries[number])
-                                    .clipShape(.capsule)
-                                    .shadow(radius: 5)
+//                                Image(countries[number])
+//                                    .clipShape(.capsule)
+//                                    .shadow(radius: 5)
+                                FlageImage(flag: countries[number])
                             }
+                            
                             
                         }
                     }
@@ -98,6 +101,16 @@ struct ContentView: View {
     func RestartGame() {
         askQuestion()
         score = 0
+    }
+    
+    struct FlageImage: View {
+        var flag: String
+        
+        var body: some View {
+            Image(flag)
+                .clipShape(.capsule)
+                .shadow(radius: 5)
+        }
     }
     
 }
