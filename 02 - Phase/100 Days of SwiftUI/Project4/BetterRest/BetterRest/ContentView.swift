@@ -36,12 +36,12 @@ struct ContentView: View {
                     .font(.headline)
                 
                 DatePicker(
-                    "Please enter a time",
+                    "Please enter a time z",
                     selection: $wakeUp,
                     displayedComponents: .hourAndMinute
                 )
                 .labelsHidden()
-                VStack {
+                Section {
                     Text("Desired amount of sleep")
                         .font(.headline)
                     
