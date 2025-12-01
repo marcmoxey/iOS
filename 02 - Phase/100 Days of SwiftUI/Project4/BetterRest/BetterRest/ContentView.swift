@@ -11,7 +11,14 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State private var wakeUp = Date.now
+    static var defaultWakeTime: Date {
+        var components = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components) ?? .now
+    }
+    
+    @State private var wakeUp = defaultWakeTime
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
     
@@ -19,9 +26,12 @@ struct ContentView: View {
     @State private var alertMessage = ""
     @State private var showingAlert = false
     
+   
+    
+    
     var body: some View {
         NavigationStack {
-            VStack {
+            Form {
               Text("Who do you want to wake up?")
                     .font(.headline)
                 
@@ -31,18 +41,22 @@ struct ContentView: View {
                     displayedComponents: .hourAndMinute
                 )
                 .labelsHidden()
+                VStack {
+                    Text("Desired amount of sleep")
+                        .font(.headline)
+                    
+                    
+                    Stepper(
+                        "\(sleepAmount.formatted()) hours",
+                        value: $sleepAmount,
+                        in: 4...12,
+                        step: 0.25
+                    )
+                }
+               
+             
                 
-                Text("desired amount of sleep")
-                    .font(.headline)
-                
-                Stepper(
-                    "\(sleepAmount.formatted()) hours",
-                    value: $sleepAmount,
-                    in: 4...12,
-                    step: 0.25
-                )
-                
-                Stepper("\(coffeeAmount) cup(s)", value: $coffeeAmount, in: 1...20)
+                Stepper("^[\(coffeeAmount) cup](inflect:true)", value: $coffeeAmount, in: 1...20)
             }.alert(alertTitle, isPresented: $showingAlert) {
                 Button("OK") {}
             } message: {
