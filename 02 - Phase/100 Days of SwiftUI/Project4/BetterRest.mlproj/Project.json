@@ -1,0 +1,29 @@
+{
+  "activityEntities" : [
+    "projectCreated",
+    [
+      {
+        "createdDate" : "2025-12-01T16:40:33Z",
+        "event" : "projectCreated",
+        "id" : "FFD243B3-D001-4C14-8D6D-5558E336DD58",
+        "subtitle" : "BetterRest",
+        "title" : "Project Created"
+      }
+    ]
+  ],
+  "authorName" : "Marc Moxey",
+  "createdDate" : "2025-12-01T16:40:33Z",
+  "description" : "",
+  "id" : "B617ACD9-13E4-484F-A940-075622BE9C8B",
+  "license" : "",
+  "location" : "",
+  "modifiedDate" : "2025-12-01T16:40:33Z",
+  "projectName" : "BetterRest",
+  "settingsEntity" : {
+    "snapshotOnExtendTraining" : true,
+    "snapshotOnResumeTraining" : false
+  },
+  "taskType" : "generalRegresor",
+  "title" : "Tabular Regression",
+  "version" : "1.1"
+}
