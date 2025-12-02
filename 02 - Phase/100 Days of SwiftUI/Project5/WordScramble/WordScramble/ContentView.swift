@@ -68,6 +68,16 @@ struct ContentView: View {
             return
         }
         
+        guard tooShortWord(word: answer) else {
+            wordError(title: "Word too short" , message: "Word has to be more than 3 characters")
+            return
+        }
+        
+        guard noRootWord(word: answer) else {
+            wordError(title: "No start word", message: "Can't use start word")
+            
+            return
+        }
         
         
         withAnimation {
@@ -96,6 +106,23 @@ struct ContentView: View {
         // if were are *here* there was a problem trigger a crash and report the error
         fatalError("Could not load start.txt from bundle")
     }
+    
+    func tooShortWord(word: String) -> Bool {
+        if word.count < 3 {
+            return false
+        }
+        
+        return true
+    }
+    
+    func noRootWord(word: String) -> Bool {
+        if word != rootWord {
+            return true
+        }
+        
+        return false
+    }
+    
     
     func isOriginal(word: String) -> Bool {
         !usedWords.contains(word)
