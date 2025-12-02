@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+
+    
     @State private var usedWords = [String]()
     @State private var rootWord = ""
     @State private var newWord = ""
@@ -16,7 +18,17 @@ struct ContentView: View {
     @State private var errorTitle = ""
     @State private var errorMessage = ""
     @State private var showingError = false
+
     
+    var calculatedScore: Int {
+        
+        var score = 0
+        for word in usedWords {
+            score += word.count
+        }
+        
+        return score
+    }
     
     var body: some View {
         NavigationStack {
@@ -36,6 +48,10 @@ struct ContentView: View {
                         
                     }
                 }
+                
+                Section("Score") {
+                    Text("Score: \(calculatedScore)")
+                }
             }
             .navigationTitle(rootWord)
             .toolbar {
@@ -54,6 +70,13 @@ struct ContentView: View {
             }
         }
     }
+    
+//    func calculateScore() {
+//      for word in usedWords {
+//          score += word.count
+//        }
+//    }
+        
         func addNewWord() {
             // lowercase and trim the word, to make sure we don't add
             // duplicate words with case difference
