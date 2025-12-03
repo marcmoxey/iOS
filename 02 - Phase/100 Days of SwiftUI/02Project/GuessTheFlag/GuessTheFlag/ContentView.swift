@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
     @State private var score = 0
+    
+    @State private var animationAmount = 0.0
  
     var body: some View {
         
@@ -38,16 +40,25 @@ struct ContentView: View {
                             .foregroundStyle(.secondary)
                         
                         ForEach(0..<3) { number in
-                            Button {
+                            Button
+                            {
                                 flagTapped(number)
+                                withAnimation {
+                                    animationAmount += 360
+                                }
+                                    
                             } label: {
 //                                Image(countries[number])
 //                                    .clipShape(.capsule)
 //                                    .shadow(radius: 5)
-                                FlageImage(flag: countries[number])
+                                if number == correctAnswer {
+                                    FlageImage(flag: countries[number])
+                                        .rotation3DEffect(.degrees(animationAmount),axis: (x: 0, y: 1, z: 0))
+                                } else {
+                                    FlageImage(flag: countries[number])
+                                }
                             }
-                            
-                            
+                     
                         }
                     }
                     
@@ -56,6 +67,7 @@ struct ContentView: View {
                 .padding(.vertical, 20)
                 .background(.regularMaterial)
                 .clipShape(.rect(cornerRadius: 20))
+            
                 
                 Spacer()
                 Spacer()
@@ -78,6 +90,8 @@ struct ContentView: View {
                 Text("Your score is  \(score)")
             }
     }
+    
+    
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
@@ -110,8 +124,10 @@ struct ContentView: View {
             Image(flag)
                 .clipShape(.capsule)
                 .shadow(radius: 5)
+                
         }
     }
+    
     
 }
 
