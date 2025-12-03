@@ -15,7 +15,10 @@ struct ContentView: View {
     @State private var score = 0
     
     @State private var animationAmount = 0.0
- 
+    @State private var selectedFlag: Int = -1
+    @State private var opacityLevel = 1.0
+    @State private var scaleAmount = 1.0
+    
     var body: some View {
         
         ZStack {
@@ -40,25 +43,33 @@ struct ContentView: View {
                             .foregroundStyle(.secondary)
                         
                         ForEach(0..<3) { number in
-                            Button
-                            {
+                            Button {
+                                selectedFlag = number         // ← correct flag stored
+                                
                                 flagTapped(number)
-                                withAnimation {
-                                    animationAmount += 360
+                                
+                                withAnimation(.easeInOut) {
+                                    animationAmount += 360    // only rotates selected flag
+                                    opacityLevel = 0.25       // fades other flags
+                                    scaleAmount -= 0.5
                                 }
-                                    
+                                
                             } label: {
-//                                Image(countries[number])
-//                                    .clipShape(.capsule)
-//                                    .shadow(radius: 5)
-                                if number == correctAnswer {
-                                    FlageImage(flag: countries[number])
-                                        .rotation3DEffect(.degrees(animationAmount),axis: (x: 0, y: 1, z: 0))
-                                } else {
-                                    FlageImage(flag: countries[number])
-                                }
+                                FlageImage(flag: countries[number])
+                                    .rotation3DEffect(
+                                        .degrees(selectedFlag == number ? animationAmount : 0),
+                                        axis: (x: 0, y: 1, z: 0)
+                                    )
+                                //If the player hasn’t tapped any flag OR this is the flag they tapped → keep it fully visible
+                                    .opacity(
+                                        selectedFlag == -1 || selectedFlag == number
+                                        ? 1          // before tap OR correct flag → full opacity
+                                        : opacityLevel  // fade only other flags
+                                    )
+                                    .scaleEffect(
+                                        selectedFlag == -1 || selectedFlag == number ? scaleAmount : 0.5
+                                    )
                             }
-                     
                         }
                     }
                     
@@ -90,8 +101,6 @@ struct ContentView: View {
                 Text("Your score is  \(score)")
             }
     }
-    
-    
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
@@ -110,6 +119,12 @@ struct ContentView: View {
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        
+        // RESET animation states
+        selectedFlag = -1
+        opacityLevel = 1.0
+        animationAmount = 0
+        scaleAmount = 1.0
     }
     
     func RestartGame() {
@@ -127,7 +142,6 @@ struct ContentView: View {
                 
         }
     }
-    
     
 }
 
