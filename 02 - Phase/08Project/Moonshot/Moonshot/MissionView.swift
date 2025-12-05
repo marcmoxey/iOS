@@ -32,6 +32,10 @@ struct MissionView: View {
                     }
                     .padding(.top)
                 
+                
+                Text(mission.formattedLauchDate)
+                
+                
                 VStack(alignment: .leading) {
                     Rectangle()
                         .frame(height: 2)
@@ -99,7 +103,7 @@ struct MissionView: View {
     
     init(mission: Mission, astronauts: [String: Astronaut]) {
         self.mission = mission
-        
+ 
         self.crew = mission.crew.map { member in
             if let astronaut = astronauts[member.name] {
                 return CrewMember(role: member.role, astronaut: astronaut)
@@ -107,6 +111,8 @@ struct MissionView: View {
                 fatalError("Missing \(member.name)")
             }
         }
+        
+        
     }
 
 }
