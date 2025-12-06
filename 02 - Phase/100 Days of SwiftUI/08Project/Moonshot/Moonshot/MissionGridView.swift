@@ -1,24 +1,26 @@
 //
-//  ContentView.swift
+//  MissionGridView.swift
 //  Moonshot
 //
-//  Created by Marc Moxey on 12/4/25.
+//  Created by Marc Moxey on 12/5/25.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct MissionGridView: View {
     
-    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
-    let missions: [Mission] = Bundle.main.decode("missions.json")
+    let astronauts: [String: Astronaut]
+    let missions: [Mission]
+    
     
     let columns = [
         GridItem(.adaptive(minimum: 150))
     ]
+    
+    
     var body: some View {
-        //Text(String(astronauts.count))
         
-        NavigationStack {
+       
             ScrollView {
                 LazyVGrid(columns: columns) {
                     ForEach(missions) { mission in
@@ -49,7 +51,7 @@ struct ContentView: View {
                                 .background(.lightBackground)
                             }
                         }
-                        .navigationTitle("Moonshot")
+                    
                     }
                 }
                 .clipShape(.rect(cornerRadius:10))
@@ -58,12 +60,15 @@ struct ContentView: View {
             }
             .background(.darkBackground)
             .preferredColorScheme(ColorScheme.dark)
-        }
+     
+        
     }
-    
-    
 }
 
+
 #Preview {
-    ContentView()
+    let missions: [Mission] = Bundle.main.decode("missions.json")
+    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
+    
+    MissionGridView(astronauts: astronauts, missions: missions)
 }
